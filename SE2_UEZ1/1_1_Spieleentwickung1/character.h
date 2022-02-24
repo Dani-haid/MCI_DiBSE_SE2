@@ -1,7 +1,3 @@
-//
-// Created by Daniela Haid on 21.02.22.
-//
-
 #ifndef CL_1_1_SPIELEENTWICKUNG_1_CHARACTER_H
 #define CL_1_1_SPIELEENTWICKUNG_1_CHARACTER_H
 
@@ -9,7 +5,7 @@
 #include <string>
 #include "item.h"
 
-//Forward declaration --> nochmal im Detail anschauen
+//Forward declaration
 struct Hero_t;
 
 struct Character_t {

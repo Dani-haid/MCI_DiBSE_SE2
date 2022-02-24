@@ -3,7 +3,8 @@ SE2_UEZ1/1_1_Spieleentwickung1/prototyp.o
 
 *.o
 
-.DS_Store
+#.DS_Store
+**/.DS_Store
 
 *.txt
 

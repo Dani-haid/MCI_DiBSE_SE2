@@ -21,9 +21,9 @@ int main() {
     initItem(&pascal.inventory[0], (char*)"Giftpfeil", 5);
 
     if(fight(&annina, &matthias)){
-        for (int i = 0; i < 12; ++i) {
+        for (int i = 0; i < 10; ++i) {
             if(annina.inventory[i].isValid == true){
-                if(i >= 11){
+                if(i >= 9){
                     std::cout<<"Inventar ist voll."<<std::endl;
                 }
                 continue;
@@ -36,9 +36,9 @@ int main() {
             }
         }
         if(fight(&annina, &pascal)){
-            for (int i = 0; i < 12; ++i) {
+            for (int i = 0; i < 10; ++i) {
                 if(annina.inventory[i].isValid == true){
-                    if(i >= 11){
+                    if(i >= 9){
                         std::cout<<"Inventar ist voll."<<std::endl;
                     }
                     continue;
@@ -50,7 +50,7 @@ int main() {
                     break;
                 }
             }
-            for (int j = 0; j<12; ++j) {
+            for (int j = 0; j<10; ++j) {
                 if(annina.inventory[j].isValid == true){
                     sellItem(&annina, j);
                 }

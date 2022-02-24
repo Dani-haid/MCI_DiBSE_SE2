@@ -13,8 +13,12 @@ void initHero(Hero_t* hero, char* name, int health, int gold){
     hero->health = health;
     hero->gold = gold;
 
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 10; ++i) {
         initItem(&hero->inventory[i]);
+    }
+
+    for (int i = 0; i < 2; ++i) {
+        initItem(&hero->equipment[i]);
     }
 };
 
