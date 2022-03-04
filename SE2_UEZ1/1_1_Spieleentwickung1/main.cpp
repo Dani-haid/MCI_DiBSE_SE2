@@ -2,6 +2,7 @@
 #include "hero.h"
 #include <ctime>
 #include <cstdlib>
+#include "character.h"
 
 int main() {
 
@@ -21,6 +22,7 @@ int main() {
     initItem(&pascal.inventory[0], (char*)"Giftpfeil", 5);
 
     if(fight(&annina, &matthias)){
+        std::cout<<matthias.name << " fiel in Ohnmacht! "<< annina.name << " hat noch " << annina.health << " Lebenspunkte uebrig!" <<std::endl;
         for (int i = 0; i < 10; ++i) {
             if(annina.inventory[i].isValid == true){
                 if(i >= 9){
@@ -35,27 +37,37 @@ int main() {
                 break;
             }
         }
-        if(fight(&annina, &pascal)){
-            for (int i = 0; i < 10; ++i) {
-                if(annina.inventory[i].isValid == true){
-                    if(i >= 9){
-                        std::cout<<"Inventar ist voll."<<std::endl;
-                    }
-                    continue;
-                }else{
-                    annina.inventory[i].name = "Laserschwert";
-                    annina.inventory[i].value = 25;
-                    annina.inventory[i].isValid = true;
-                    std::cout<<"Gegenstand " <<annina.inventory[i].name << " wurde zum Inventar der Heldin hinzugefügt."<<std::endl;
-                    break;
+    }else{
+        std::cout<<"Game Over! " << annina.name << " fiel in Ohnmacht! "<< matthias.name << " hat noch " << matthias.health << " Lebenspunkte uebrig!" <<std::endl;
+        return 0;
+    }
+
+    if(fight(&annina, &pascal)){
+        std::cout<<pascal.name << " fiel in Ohnmacht! "<< annina.name << " hat noch " << annina.health << " Lebenspunkte uebrig!" <<std::endl;
+        for (int i = 0; i < 10; ++i) {
+            if(annina.inventory[i].isValid == true){
+                if(i >= 9){
+                    std::cout<<"Inventar ist voll."<<std::endl;
                 }
+                continue;
+            }else{
+                annina.inventory[i].name = "Laserschwert";
+                annina.inventory[i].value = 15;
+                annina.inventory[i].isValid = true;
+                std::cout<<"Gegenstand " << annina.inventory[i].name << " wurde zum Inventar der Heldin hinzugefügt."<<std::endl;
+                break;
             }
-            for (int j = 0; j<10; ++j) {
-                if(annina.inventory[j].isValid == true){
-                    sellItem(&annina, j);
-                }
-            }
-        };
-    };
+        }
+    }else{
+        std::cout<<"Game Over! " << annina.name << " fiel in Ohnmacht! "<< matthias.name << " hat noch " << matthias.health << " Lebenspunkte uebrig!" <<std::endl;
+        return 0;
+    }
+
+    for (int j = 0; j<10; ++j) {
+        if(annina.inventory[j].isValid == true){
+            sellItem(&annina, j);
+        }
+    }
+
     return 0;
 }

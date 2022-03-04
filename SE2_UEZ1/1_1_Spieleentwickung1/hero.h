@@ -1,21 +1,18 @@
 #ifndef CL_1_1_SPIELEENTWICKUNG_1_HERO_H
 #define CL_1_1_SPIELEENTWICKUNG_1_HERO_H
 
+#include <string>
+#include "item.h"
+
 //Forward declaration
 struct Character_t;
 
-#include <string>
-#include "item.h"
-#include "character.h"
-
-
 struct Hero_t {
     std::string name;
-    int health = 0;
-    int gold = 0;
+    int health;
+    int gold;
     Item_t inventory[10];
     Item_t equipment[2];
-    //Item_t inventory[12]; //muss Inventar und Ausrüstung getrennt werden?
 };
 
 

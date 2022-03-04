@@ -1,7 +1,3 @@
-//
-// Created by Daniela Haid on 21.02.22.
-//
-
 #ifndef CL_1_1_SPIELEENTWICKUNG_1_ITEM_H
 #define CL_1_1_SPIELEENTWICKUNG_1_ITEM_H
 
@@ -10,7 +6,7 @@
 
 struct Item_t {
     std::string name;
-    int value = 0;
+    int value;
     bool isValid;
 };
 

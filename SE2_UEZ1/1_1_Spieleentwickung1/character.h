@@ -10,8 +10,8 @@ struct Hero_t;
 
 struct Character_t {
     std::string name;
-    int health = 0;
-    int gold = 0;
+    int health;
+    int gold;
     Item_t inventory[10];
 };
 

@@ -1,7 +1,3 @@
-//
-// Created by Daniela Haid on 21.02.22.
-//
-
 #include "item.h"
 
 void initItem(Item_t *ITEM, char *name, int gold) {
