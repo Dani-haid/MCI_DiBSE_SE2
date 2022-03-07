@@ -13,17 +13,23 @@ private:
     bool isValid;
 
 public:
-    //für was std::string& verwenden??
-    void initItem(std::string name, int gold){
-        this->name = name;
-        this->value = gold;
-        isValid = true; //hier auch this-> notwendig?
-        std::cout << this->name << " " << this->value << " " << this->isValid << std::endl;
+    void initItem(const std::string& name, int gold);
+
+    void initItem(void);
+
+    //Getter für alle Eigenschaften:
+    std::string getItemName() {
+        return name;
+    };
+    int getItemValue() {
+        return value;
+    };
+    bool getItemValidation() {
+        return isValid;
     };
 
-    void initItem(void){
-        isValid = false;
-    };
+    //Hier ggf. noch Setter einfügen
+    //********
 };
 
 

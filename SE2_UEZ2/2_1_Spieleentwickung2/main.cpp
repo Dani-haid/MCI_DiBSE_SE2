@@ -8,20 +8,21 @@ int main() {
 
     Hero annina;
     annina.initHero("Annina", 300, 50);
-    //std::cout << "main ausgabe: " << annina.name << " " << annina.health << " " << annina.gold << std::endl;
+    std::cout << "main ausgabe: " << annina.getHeroName() << " " << annina.getHerohealth() << " " << annina.getHerogold() << std::endl;
 
     //--------------Tests-----------------------
     //Item item1;
     //item1.initItem("Zange", 50);
 
-    //std::cout << "main ausgabe: " << item1.name << " " << item1.value << " " << item1.isValid << std::endl;
+    //std::cout << "main ausgabe: " << item1.getItemName() << " " << item1.getItemValue() << " " << item1.getItemValidation() << std::endl;
 
-    Character peter;
-    peter.initCharacter("Peter", 2, 200);
+    Character matthias;
+    matthias.initCharacter("Matthias", 2, 200);
+    std::cout << "main ausgabe: " << matthias.getCharacterName() << " " << matthias.getCharacterhealth() << " " << matthias.getCharacterhealth() << std::endl;
 
-    peter.attack(annina);
-    std::cout<< "Lebenspunkte " << peter.name << ": " << peter.health << std::endl;
-    std::cout<< "Lebenspunkte " << annina.name << ": " << annina.health << std::endl;
+    matthias.attack(annina);
+    std::cout<< "Lebenspunkte " << matthias.getCharacterName() << ": " << matthias.getCharacterhealth() << std::endl;
+    std::cout<< "Lebenspunkte " << annina.getHeroName() << ": " << annina.getHerohealth() << std::endl;
 
 /*    annina.attack(peter);
     std::cout<< "Lebenspunkte " << peter.name << ": " << peter.health << std::endl;

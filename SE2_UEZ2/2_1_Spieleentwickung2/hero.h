@@ -9,7 +9,7 @@
 class Character;
 
 class Hero {
-public:
+private:
     std::string name;
     int health;
     int gold;
@@ -17,30 +17,26 @@ public:
     Item equipment[2];
 
 public:
-    void initHero(std::string name, int health, int gold){
-        this->name = name;
-        this->health = health;
-        this->gold = gold;
+    void initHero(const std::string& name, int health, int gold);
 
-        std::cout << this->name << " " << this->health << " " << this->gold << std::endl;
+    //void attack(Character &enemy);
 
-        for (int i = 0; i < 10; ++i) {
-            Item inventory[i];
-            inventory[i].initItem();
-        }
-
-        for (int i = 0; i < 2; ++i) {
-            Item equipment[i];
-            equipment[i].initItem();
-        }
+    //Getter:
+    std::string getHeroName() {
+        return name;
+    };
+    int getHerohealth() {
+        return health;
+    };
+    int getHerogold() {
+        return gold;
     };
 
-    void attack(Character &enemy){
-        //Heldin greift Gegener an und reduziert health random zwischen 15-25
-        int damage = 15 + std::rand() % 11;
-        enemy.health -= damage;
-        std::cout<< name << " trifft " << enemy.name << " für " << damage << " Lebenspunkte!" << std::endl;
+
+    void reduceHeroHealth(int damage) {
+        this->health -= damage;
     };
+    //Setter:
 
 };
 
