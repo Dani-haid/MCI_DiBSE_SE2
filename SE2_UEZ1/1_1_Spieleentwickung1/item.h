@@ -12,6 +12,7 @@ struct Item_t {
 
 void initItem(Item_t* ITEM, char* name, int gold);
 void initItem(Item_t* gegenstand);
+//
 
 
 
