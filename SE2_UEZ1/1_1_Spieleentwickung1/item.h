@@ -1,8 +1,8 @@
 #ifndef CL_1_1_SPIELEENTWICKUNG_1_ITEM_H
 #define CL_1_1_SPIELEENTWICKUNG_1_ITEM_H
 
-
 #include <string>
+#include <iostream>
 
 struct Item_t {
     std::string name;

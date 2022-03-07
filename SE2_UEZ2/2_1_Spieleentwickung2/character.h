@@ -1,12 +1,11 @@
 #ifndef INC_2_1_SPIELEENTWICKUNG2_CHARACTER_H
 #define INC_2_1_SPIELEENTWICKUNG2_CHARACTER_H
 
-#include <iostream>
-#include "item.h"
 #include <string>
-#include "hero.h"
+#include "item.h"
 
-//class Hero; --> CHECK!
+//Forward declaration
+class Hero;
 
 class Character {
 private:
@@ -17,33 +16,20 @@ private:
 
 public:
     void initCharacter(const std::string& name, int health, int gold);
+    void attack(Hero &hero);//wieso hier Pointer oder Referenz??
 
-    void attack(Hero &hero);
-    //wieso hier Pointer oder Referenz??
+    int addInventarItem(const Item& item);
+    Item* removeInventarItem(int slot);;
 
     //Getter:
-    std::string getCharacterName() {
-        return name;
-    };
-    int getCharacterhealth() {
-        return health;
-    };
-    int getCharactergold() {
-        return gold;
-    };
-    void getInventory(int index) {
-        //return ??
-        //tbd!!
-    };
+    std::string getName();
+    int getHealth();
+    int getGold();
+    Item* getInventory(int index);
 
-    //Setter tbd!
-    //CHECK
-    void reduceCharacterHealth(int damage) {
-        this->health -= damage;
-    };
-/*    void setCharacterhealth(int health) {
-        this->health = health;
-    };*/
+    //Setter:
+    void setHealth(int health);
+    void setGold(int gold);
 };
 
 

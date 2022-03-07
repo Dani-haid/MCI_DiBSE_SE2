@@ -1,11 +1,10 @@
 #ifndef INC_2_1_SPIELEENTWICKUNG2_HERO_H
 #define INC_2_1_SPIELEENTWICKUNG2_HERO_H
 
-#include <iostream>
-#include "item.h"
-//#include "character.h"
 #include <string>
+#include "item.h"
 
+//Forward declaration
 class Character;
 
 class Hero {
@@ -18,26 +17,26 @@ private:
 
 public:
     void initHero(const std::string& name, int health, int gold);
+    void attack(Character &enemy);
 
-    //void attack(Character &enemy);
+    void sellItem(int index);
+    bool fight(Character &enemy);
+
+    int addInventarItem(const Item& item);
+    int addEquipmentItem(const Item& item);
+    Item* removeInventarItem(int slot);
+    Item* removeEquipmentItem(int slot);
 
     //Getter:
-    std::string getHeroName() {
-        return name;
-    };
-    int getHerohealth() {
-        return health;
-    };
-    int getHerogold() {
-        return gold;
-    };
+    std::string getName();
+    int getHealth();
+    int getGold();
+    Item *getInventory(int index);
+    Item *getEquipment(int index);
 
-
-    void reduceHeroHealth(int damage) {
-        this->health -= damage;
-    };
     //Setter:
-
+    void setHealth(int health);
+    void setGold(int gold);
 };
 
 

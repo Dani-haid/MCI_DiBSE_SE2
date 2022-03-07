@@ -4,9 +4,7 @@
 #include <string>
 #include <iostream>
 
-
 class Item {
-
 private:
     std::string name;
     int value;
@@ -14,22 +12,17 @@ private:
 
 public:
     void initItem(const std::string& name, int gold);
-
     void initItem(void);
 
-    //Getter für alle Eigenschaften:
-    std::string getItemName() {
-        return name;
-    };
-    int getItemValue() {
-        return value;
-    };
-    bool getItemValidation() {
-        return isValid;
-    };
+    //Getter:
+    std::string getName();
+    int getValue();
+    bool isIsValid();
 
-    //Hier ggf. noch Setter einfügen
-    //********
+    //Setter:
+    void setName(std:: string name);
+    void setValue(int value);
+    void setIsValid(bool isValid);
 };
 
 
