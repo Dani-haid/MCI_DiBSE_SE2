@@ -62,7 +62,7 @@ Item *Character::getInventory(int index) {
 
 //Setter:
 void Character::setHealth(int health) {
-    this->health -= health;
+    this->health = health;
 }
 
 void Character::setGold(int gold) {

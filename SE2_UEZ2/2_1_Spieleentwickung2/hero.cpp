@@ -112,7 +112,7 @@ Item *Hero::getEquipment(int index){
 
 //Setter:
 void Hero::setHealth(int health) {
-    this->health -= health;
+    this->health = health;
 }
 
 void Hero::setGold(int gold) {

@@ -19,7 +19,7 @@ public:
     void attack(Hero &hero);//wieso hier Pointer oder Referenz??
 
     int addInventarItem(const Item& item);
-    Item* removeInventarItem(int slot);;
+    Item* removeInventarItem(int slot);
 
     //Getter:
     std::string getName();
