@@ -17,7 +17,6 @@ std::string Item::getName() {
 int Item::getValue() {
     return value;
 }
-
 bool Item::isIsValid() {
     return isValid;
 }
@@ -26,11 +25,9 @@ bool Item::isIsValid() {
 void Item::setName(std::string name) {
     this->name = name;
 }
-
 void Item::setValue(int value) {
     this->value = value;
 }
-
 void Item::setIsValid(bool isValid) {
     this->isValid = isValid;
 }

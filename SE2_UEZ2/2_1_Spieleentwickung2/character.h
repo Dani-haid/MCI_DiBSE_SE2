@@ -16,7 +16,7 @@ private:
 
 public:
     void initCharacter(const std::string& name, int health, int gold);
-    void attack(Hero &hero);//wieso hier Pointer oder Referenz??
+    void attack(Hero &hero);
 
     int addInventarItem(const Item& item);
     Item* removeInventarItem(int slot);

@@ -36,6 +36,8 @@ void Hero::sellItem(int index) {
 }
 
 bool Hero::fight(Character &enemy) {
+    std::cout << "--------------------" << std::endl;
+    std::cout << "Kampf " << this->getName() << " gegen " << enemy.getName() << " beginnt!" << std::endl;
     while(this->health > 0 && enemy.getHealth() > 0){
         this->attack(enemy);//Heldin greift Gegner an
         if(enemy.getHealth() > 0){
@@ -50,6 +52,9 @@ int Hero::addInventarItem(const Item &item) {
         if(!this->inventory[i].isIsValid()){
             //wenn Platz auf false, also leer, dann füge Item hinzu
             this->inventory[i] = item;
+            this->inventory[i].setIsValid(true);
+            std::cout<<"Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << this->getName() << " hinzugefügt."<<std::endl;
+            //std::cout<< this->getName() << " schnappt sich den Gegenstand " << this->inventory[i].getName() << " von ihrem besiegten Gegner!"<<std::endl;
             return i; //index im inventory zurückgeben
         }
     }
@@ -61,6 +66,8 @@ int Hero::addEquipmentItem(const Item &item) {
         if(!this->equipment[i].isIsValid()){
             //wenn Platz auf false, also leer, dann füge Item hinzu
             this->equipment[i] = item;
+            this->equipment[i].setIsValid(true);
+            std::cout<<"Gegenstand " << this->equipment[i].getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt."<<std::endl;
             return i; //index im inventory zurückgeben
         }
     }
@@ -96,25 +103,26 @@ int Hero::getGold() {
     return gold;
 }
 
-Item *Hero::getInventory(int index) {
+Item* Hero::getInventory(int index) {
     if(this->inventory[index].isIsValid()){
-        return &inventory[index];
+        Item& item = this->inventory[index];
+        return &item;
     };
-    return nullptr; //check
+    return 0;//return false
 }
 
-Item *Hero::getEquipment(int index){
+Item* Hero::getEquipment(int index){
     if(this->equipment[index].isIsValid()){
-        return &equipment[index];
+        Item& equipment = this->equipment[index];
+        return &equipment;
     };
-    return nullptr; //check
+    return 0;
 }
 
 //Setter:
 void Hero::setHealth(int health) {
     this->health = health;
 }
-
 void Hero::setGold(int gold) {
     this->gold = gold;
 }
