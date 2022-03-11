@@ -19,12 +19,13 @@ public:
     void attack(Hero &hero);
 
     int addInventarItem(const Item& item);
-    Item* removeInventarItem(int slot);
+    Item removeInventarItem(int slot);
+
 
     //Getter:
-    std::string getName();
-    int getHealth();
-    int getGold();
+    const std::string getName() const;
+    int getHealth() const;
+    int getGold() const;
     Item* getInventory(int index);
 
     //Setter:

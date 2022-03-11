@@ -11,13 +11,13 @@ void Item::initItem(void) {
 }
 
 //Getter:
-std::string Item::getName() {
+std::string Item::getName() const {
     return name;
 }
-int Item::getValue() {
+int Item::getValue() const {
     return value;
 }
-bool Item::isIsValid() {
+bool Item::isIsValid() const{
     return isValid;
 }
 

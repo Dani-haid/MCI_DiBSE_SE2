@@ -24,7 +24,8 @@ int Character::addInventarItem(const Item& item) {
     for (int i = 0; i < 10; ++i) {
         if(!inventory[i].isIsValid()){
             //wenn Platz auf false, also leer, dann füge Item hinzu
-            inventory[i] = item;
+            this->inventory[i].setName(item.getName());
+            this->inventory[i].setValue(item.getValue());
             this->inventory[i].setIsValid(true);
             std::cout<<"Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << this->getName() << " hinzugefügt."<<std::endl;
             return i; //index im inventory zurückgeben
@@ -33,24 +34,27 @@ int Character::addInventarItem(const Item& item) {
     return -1; //wenn alle Plätze belegt, return -1;
 }
 
-Item* Character::removeInventarItem(int slot) {
+Item Character::removeInventarItem(int slot) {
+    Item item;
+    item.initItem("", -1);
+    item.setIsValid(false);
     if(this->inventory[slot].isIsValid()){ //wenn Eingabeslot gültig, dann isValid auf false setzen
         this->inventory[slot].setIsValid(false);
         //std::cout << inventory[slot].getName() << " an Stelle " << slot << " wurde bei " << this->getName() << " auf false gesetzt" << std::endl;
-        Item& item = this->inventory[slot];
-        return &item;
+        item = this->inventory[slot];
+        return item;
     };
-    return nullptr;
+    return item;
 }
 
 //Getter:
-std::string Character::getName() {
+const std::string Character::getName() const{
     return name;
 }
-int Character::getHealth() {
+int Character::getHealth() const{
     return health;
 }
-int Character::getGold() {
+int Character::getGold() const{
     return gold;
 }
 

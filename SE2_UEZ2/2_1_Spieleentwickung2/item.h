@@ -15,9 +15,9 @@ public:
     void initItem(void);
 
     //Getter:
-    std::string getName();
-    int getValue();
-    bool isIsValid();
+    std::string getName() const;
+    int getValue() const;
+    bool isIsValid() const;
 
     //Setter:
     void setName(std:: string name);

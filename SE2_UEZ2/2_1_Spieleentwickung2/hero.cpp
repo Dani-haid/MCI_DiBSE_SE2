@@ -30,7 +30,7 @@ void Hero::sellItem(int index) {
         if(this->inventory[index].isIsValid()){
             this->gold += inventory[index].getValue();
             this->inventory[index].setIsValid(false);
-            std::cout<<"Gegenstand " << this->inventory[index].getName() << " wurde verkauft. " << this->name << " besitzt nun " << this->gold << " Gold." << std::endl;
+            std::cout<<"Gegenstand " << this->inventory[index].getName() << " wurde für " << this->inventory[index].getValue() << " verkauft. "<< this->name << " besitzt nun " << this->gold << " Gold." << std::endl;
         }
     }
 }
@@ -51,10 +51,10 @@ int Hero::addInventarItem(const Item &item) {
     for (int i = 0; i < 10; ++i) {
         if(!this->inventory[i].isIsValid()){
             //wenn Platz auf false, also leer, dann füge Item hinzu
-            this->inventory[i] = item;
+            this->inventory[i].setName(item.getName());
+            this->inventory[i].setValue(item.getValue());
             this->inventory[i].setIsValid(true);
             std::cout<<"Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << this->getName() << " hinzugefügt."<<std::endl;
-            //std::cout<< this->getName() << " schnappt sich den Gegenstand " << this->inventory[i].getName() << " von ihrem besiegten Gegner!"<<std::endl;
             return i; //index im inventory zurückgeben
         }
     }
@@ -74,32 +74,79 @@ int Hero::addEquipmentItem(const Item &item) {
     return -1; //wenn alle Plätze belegt, return -1;
 }
 
-Item *Hero::removeInventarItem(int slot) {
+Item Hero::removeInventarItem(int slot) {
+    Item item;
+    item.initItem("", -1);
+    item.setIsValid(false);
     if(this->inventory[slot].isIsValid()){ //wenn Eingabeslot gültig, dann isValid auf false setzen
         this->inventory[slot].setIsValid(false);
-        return &this->inventory[slot];
+        item = this->inventory[slot];
+        return item;
     };
-    return nullptr;
+    return item;
 }
 
-Item *Hero::removeEquipmentItem(int slot) {
+
+Item Hero::removeEquipmentItem(int slot) {
+    Item item;
+    item.initItem("", -1);
+    item.setIsValid(false);
     if(this->equipment[slot].isIsValid()){ //wenn Eingabeslot gültig, dann isValid auf false setzen
         this->equipment[slot].setIsValid(false);
-        return &this->equipment[slot];
+        item = this->inventory[slot];
+        return item;
     };
-    return nullptr;
+    return item;
 }
 
+int Hero::stealRandomItem(Character &enemy){
+    int randomNumbers [10] = {-1};//Array für gültige Indexes des Inventories von Character
+    int count = 0;
+    for (int i = 0; i < 10; ++i) {
+        if(enemy.getInventory(i)){
+            randomNumbers[count] = i;
+            count ++;
+        }
+    }
+    if(randomNumbers[0] < 0){
+        std::cout << "keine Items im Inventar von "<< enemy.getName() <<" gefunden." << std:: endl;
+        return 0;
+    }
+
+    int random = randomNumbers[std::rand() % (count)]; //generiere Zufallszahl
+    //std::cout << "Random Number: "<< random << std:: endl; //löschen
+
+    Item tempItem;
+
+    while(1){
+        if(enemy.getInventory(random)){//wenn Inventory an dieser Stelle true ist
+            //lösche Inventar an diesem Slot
+            std::cout << "Item "<< enemy.getInventory(random)->getName() << " an Stelle " << random <<" im Inventar von "<< enemy.getName() <<" gefunden." << std:: endl;
+            tempItem = enemy.removeInventarItem(random); //es wird Item zurückgegeben
+            break;
+        }else{
+            //erstelle neue Zufallszahl
+            random = randomNumbers[std::rand() % (count)];
+        }
+    }
+
+    //Check ob noch Platz im Inventar von Annina verfügbar und füge Item hinzu:
+    if(this->addInventarItem(tempItem) < 0){
+        std::cout<<"Kein Platz mehr vorhanden! Inventar von " << this->getName() <<" ist voll."<<std::endl;
+    };
+    return 1;
+};
+
 //Getter:
-std::string Hero::getName() {
+const std::string Hero::getName() const{
     return name;
 }
 
-int Hero::getHealth() {
+int Hero::getHealth() const{
     return health;
 }
 
-int Hero::getGold() {
+int Hero::getGold() const{
     return gold;
 }
 
