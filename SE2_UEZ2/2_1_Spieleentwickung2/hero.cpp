@@ -47,6 +47,12 @@ bool Hero::fight(Character &enemy) {
         }
     }
 
+    if(this->health > 0){
+        std::cout<<enemy.getName() << " fiel in Ohnmacht! "<< this->getName() <<
+        " hat noch "<< this->getHealth() << " Lebenspunkte uebrig!" <<std::endl;
+        this->stealRandomItem(enemy);
+    }
+
     //------tbd------//
 
     return this->health > 0;
@@ -104,40 +110,32 @@ Item Hero::removeEquipmentItem(int slot) {
 }
 
 int Hero::stealRandomItem(Character &enemy){
-    int randomNumbers [10] = {-1};//Array für gültige Indexes des Inventories von Character
+    //ggf. etwas effizienter schreiben
+    int randomNumbers [CHARACTER_INVENTORY_SIZE] = {-1};//Array für gültige Indexes des Inventories von Character
     int count = 0;
-    for (int i = 0; i < 10; ++i) {
-        if(enemy.getInventory(i)){
+    for (int i = 0; i < CHARACTER_INVENTORY_SIZE; ++i) {
+        if(enemy.getInventory(i)->isIsValid()){
             randomNumbers[count] = i;
             count ++;
         }
     }
-    if(randomNumbers[0] < 0){
+    if(randomNumbers[0] < 0){//Wenn Array an index 0 leer ist, hat der Gegner keine Items in seinem Inventar
         std::cout << "keine Items im Inventar von "<< enemy.getName() <<" gefunden." << std:: endl;
         return 0;
     }
 
-    int random = randomNumbers[std::rand() % (count)]; //generiere Zufallszahl
-
-    Item tempItem;
 
     while(1){
-        if(enemy.getInventory(random)){//wenn Inventory an dieser Stelle true ist
-            //lösche Inventar an diesem Slot
-            std::cout << "Item "<< enemy.getInventory(random)->getName() << " an Stelle " << random <<" im Inventar von "<< enemy.getName() <<" gefunden." << std:: endl;
-            tempItem = enemy.removeInventarItem(random); //es wird Item zurückgegeben
+        int random = randomNumbers[std::rand() % (count)]; //generiere Zufallszahl
+        Item temp = enemy.removeInventarItem(random);
+        if(temp.isIsValid()){
+            if(this->addInventarItem(temp) < 0){
+                std::cout<<"Kein Platz mehr vorhanden! Inventar von " << this->getName() <<" ist voll."<<std::endl;
+            };
             break;
-        }else{
-            //erstelle neue Zufallszahl
-            random = randomNumbers[std::rand() % (count)];
         }
     }
-
-    //Check ob noch Platz im Inventar von Annina verfügbar und füge Item hinzu:
-    if(this->addInventarItem(tempItem) < 0){
-        std::cout<<"Kein Platz mehr vorhanden! Inventar von " << this->getName() <<" ist voll."<<std::endl;
-    };
-    return 1;
+    return health > 0;
 };
 
 //Getter:
