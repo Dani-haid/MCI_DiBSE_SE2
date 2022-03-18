@@ -8,11 +8,11 @@ void Hero::initHero(const std::string& name, int health, int gold) {
     this->health = health;
     this->gold = gold;
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < HERO_INVENTORY_SIZE; ++i) {
         this->inventory[i].initItem();
     }
 
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < HERO_EQUIPMENT_SIZE; ++i) {
         this->equipment[i].initItem();
     }
 }
@@ -26,11 +26,13 @@ void Hero::attack(Character &enemy){
 }
 
 void Hero::sellItem(int index) {
-    if(index >= 0 && index < 10){
+    if(index >= 0 && index < HERO_INVENTORY_SIZE){
         if(this->inventory[index].isIsValid()){
             this->gold += inventory[index].getValue();
             this->inventory[index].setIsValid(false);
-            std::cout<<"Gegenstand " << this->inventory[index].getName() << " wurde für " << this->inventory[index].getValue() << " verkauft. "<< this->name << " besitzt nun " << this->gold << " Gold." << std::endl;
+            std::cout<<"Gegenstand " << this->inventory[index].getName() << " wurde für "
+            << this->inventory[index].getValue() << " verkauft. "<< this->name
+            << " besitzt nun " << this->gold << " Gold." << std::endl;
         }
     }
 }
@@ -44,59 +46,61 @@ bool Hero::fight(Character &enemy) {
             enemy.attack(*this); //Gegner greift Heldin an
         }
     }
+
+    //------tbd------//
+
     return this->health > 0;
 }
 
 int Hero::addInventarItem(const Item &item) {
-    for (int i = 0; i < 10; ++i) {
-        if(!this->inventory[i].isIsValid()){
-            //wenn Platz auf false, also leer, dann füge Item hinzu
-            this->inventory[i].setName(item.getName());
-            this->inventory[i].setValue(item.getValue());
-            this->inventory[i].setIsValid(true);
-            std::cout<<"Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << this->getName() << " hinzugefügt."<<std::endl;
-            return i; //index im inventory zurückgeben
+    if(item.isIsValid()){
+        for (int i = 0; i < HERO_INVENTORY_SIZE; ++i) {
+            if(!this->inventory[i].isIsValid()){//wenn Platz auf false, also leer, dann füge Item hinzu
+                this->inventory[i] = item;
+                std::cout<<"Gegenstand " << this->inventory[i].getName() << " wurde an Stelle "
+                << i << " zum Inventar von " << this->getName() << " hinzugefügt."<<std::endl;
+                return i; //index im inventory zurückgeben
+            }
         }
     }
     return -1; //wenn alle Plätze belegt, return -1;
 }
 
 int Hero::addEquipmentItem(const Item &item) {
-    for (int i = 0; i < 2; ++i) {
-        if(!this->equipment[i].isIsValid()){
-            //wenn Platz auf false, also leer, dann füge Item hinzu
-            this->equipment[i] = item;
-            this->equipment[i].setIsValid(true);
-            std::cout<<"Gegenstand " << this->equipment[i].getName() << " wurde an Stelle " << i << " zum Equipment der Heldin hinzugefügt."<<std::endl;
-            return i; //index im inventory zurückgeben
+    if(item.isIsValid()){
+        for (int i = 0; i < HERO_EQUIPMENT_SIZE; ++i) {
+            if(!this->equipment[i].isIsValid()){//wenn Platz auf false, also leer, dann füge Item hinzu
+                this->equipment[i] = item;
+                std::cout<<"Gegenstand " << this->equipment[i].getName() << " wurde an Stelle "
+                << i << " zum Equipment der Heldin hinzugefügt."<<std::endl;
+                return i; //index im inventory zurückgeben
+            }
         }
     }
     return -1; //wenn alle Plätze belegt, return -1;
 }
 
 Item Hero::removeInventarItem(int slot) {
-    Item item;
-    item.initItem("", -1);
-    item.setIsValid(false);
-    if(this->inventory[slot].isIsValid()){ //wenn Eingabeslot gültig, dann isValid auf false setzen
+    if(slot >= 0 && slot < HERO_INVENTORY_SIZE){
+        Item temp = this->inventory[slot];
         this->inventory[slot].setIsValid(false);
-        item = this->inventory[slot];
-        return item;
-    };
-    return item;
+        return temp;
+    }
+    Item temp;
+    temp.initItem();
+    return temp;
 }
 
 
 Item Hero::removeEquipmentItem(int slot) {
-    Item item;
-    item.initItem("", -1);
-    item.setIsValid(false);
-    if(this->equipment[slot].isIsValid()){ //wenn Eingabeslot gültig, dann isValid auf false setzen
+    if(slot >= 0 && slot < HERO_EQUIPMENT_SIZE){
+        Item temp = this->equipment[slot];
         this->equipment[slot].setIsValid(false);
-        item = this->inventory[slot];
-        return item;
-    };
-    return item;
+        return temp;
+    }
+    Item temp;
+    temp.initItem();
+    return temp;
 }
 
 int Hero::stealRandomItem(Character &enemy){
@@ -137,7 +141,7 @@ int Hero::stealRandomItem(Character &enemy){
 };
 
 //Getter:
-const std::string Hero::getName() const{
+const std::string& Hero::getName() const{
     return name;
 }
 
@@ -150,25 +154,35 @@ int Hero::getGold() const{
 }
 
 Item* Hero::getInventory(int index) {
-    if(this->inventory[index].isIsValid()){
-        Item& item = this->inventory[index];
-        return &item;
-    };
-    return 0;//return false
+    if(index >= 0 && index < HERO_INVENTORY_SIZE){
+        return &this->inventory[index];
+    }
+    return nullptr;
 }
 
 Item* Hero::getEquipment(int index){
-    if(this->equipment[index].isIsValid()){
-        Item& equipment = this->equipment[index];
-        return &equipment;
-    };
-    return 0;
+    if(index >= 0 && index < HERO_EQUIPMENT_SIZE){
+        return &this->equipment[index];
+    }
+    return nullptr;
 }
 
 //Setter:
+void Hero::setName(const std::string &name) {
+    if (!name.empty()) {
+        this->name = name;
+    }
+}
+
 void Hero::setHealth(int health) {
+    if(health < 0){
+        this->health = 0;
+    }
     this->health = health;
 }
+
 void Hero::setGold(int gold) {
-    this->gold = gold;
+    if(gold >= 0){
+        this->gold = gold;
+    }
 }

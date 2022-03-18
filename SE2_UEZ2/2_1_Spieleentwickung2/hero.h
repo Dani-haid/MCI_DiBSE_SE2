@@ -4,6 +4,9 @@
 #include <string>
 #include "item.h"
 
+#define HERO_INVENTORY_SIZE		10
+#define HERO_EQUIPMENT_SIZE			2
+
 //Forward declaration
 class Character;
 
@@ -12,8 +15,8 @@ private:
     std::string name;
     int health;
     int gold;
-    Item inventory[10];
-    Item equipment[2];
+    Item inventory[HERO_INVENTORY_SIZE];
+    Item equipment[HERO_EQUIPMENT_SIZE];
 
 public:
     void initHero(const std::string& name, int health, int gold);
@@ -29,13 +32,14 @@ public:
     int stealRandomItem(Character &enemy);
 
     //Getter:
-    const std::string getName() const;
+    const std::string& getName() const;
     int getHealth() const;
     int getGold() const;
     Item *getInventory(int index);
     Item *getEquipment(int index);
 
     //Setter:
+    void setName(const std::string &name);
     void setHealth(int health);
     void setGold(int gold);
 };
