@@ -2,7 +2,6 @@
 #define INC_2_1_SPIELEENTWICKUNG2_ITEM_H
 
 #include <string>
-#include <iostream>
 
 class Item {
 private:
@@ -11,16 +10,16 @@ private:
     bool isValid;
 
 public:
-    void initItem(const std::string& name, int gold);
+    void initItem(const std::string& name, int value);
     void initItem(void);
 
     //Getter:
-    std::string getName() const;
+    const std::string& getName() const;
     int getValue() const;
     bool isIsValid() const;
 
     //Setter:
-    void setName(std:: string name);
+    void setName(const std:: string& name);
     void setValue(int value);
     void setIsValid(bool isValid);
 };

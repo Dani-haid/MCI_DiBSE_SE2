@@ -114,7 +114,6 @@ int Hero::stealRandomItem(Character &enemy){
     }
 
     int random = randomNumbers[std::rand() % (count)]; //generiere Zufallszahl
-    //std::cout << "Random Number: "<< random << std:: endl; //löschen
 
     Item tempItem;
 
