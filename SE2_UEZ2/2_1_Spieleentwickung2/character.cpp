@@ -7,7 +7,7 @@ void Character::initCharacter(const std::string& name, int health, int gold) {
     this->health = health;
     this->gold = gold;
 
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < CHARACTER_INVENTORY_SIZE; ++i) {
         this->inventory[i].initItem();
     }
 }
@@ -21,34 +21,32 @@ void Character::attack(Hero &hero) {
 }
 
 int Character::addInventarItem(const Item& item) {
-    for (int i = 0; i < 10; ++i) {
-        if(!inventory[i].isIsValid()){
-            //wenn Platz auf false, also leer, dann füge Item hinzu
-            this->inventory[i].setName(item.getName());
-            this->inventory[i].setValue(item.getValue());
-            this->inventory[i].setIsValid(true);
-            std::cout<<"Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << this->getName() << " hinzugefügt."<<std::endl;
-            return i; //index im inventory zurückgeben
+    if(item.isIsValid()){
+        for (int i = 0; i < CHARACTER_INVENTORY_SIZE; ++i) {
+            if(!inventory[i].isIsValid()){
+                //wenn Platz auf false, also leer, dann füge Item hinzu
+                this->inventory[i]=item;
+                std::cout<<"Gegenstand " << this->inventory[i].getName() << " wurde an Stelle " << i << " zum Inventar von " << this->getName() << " hinzugefügt."<<std::endl;
+                return i; //index im inventory zurückgeben
+            }
         }
     }
     return -1; //wenn alle Plätze belegt, return -1;
 }
 
 Item Character::removeInventarItem(int slot) {
-    Item item;
-    item.initItem("", -1);
-    item.setIsValid(false);
-    if(this->inventory[slot].isIsValid()){ //wenn Eingabeslot gültig, dann isValid auf false setzen
-        this->inventory[slot].setIsValid(false);
-        //std::cout << inventory[slot].getName() << " an Stelle " << slot << " wurde bei " << this->getName() << " auf false gesetzt" << std::endl;
-        item = this->inventory[slot];
-        return item;
-    };
-    return item;
+    if(slot >= 0 && slot < CHARACTER_INVENTORY_SIZE){
+        Item temp = this->inventory[slot];
+        this->inventory[slot].setIsValid(false); //wenn Eingabeslot gültig, dann isValid auf false setzen
+        return temp;
+    }
+    Item temp;
+    temp.initItem();
+    return temp;
 }
 
 //Getter:
-const std::string Character::getName() const{
+const std::string& Character::getName() const{
     return name;
 }
 int Character::getHealth() const{
@@ -59,17 +57,28 @@ int Character::getGold() const{
 }
 
 Item *Character::getInventory(int index) {
-    if(this->inventory[index].isIsValid()){
-        Item& item = this->inventory[index];
-        return &item;
-    };
-    return 0;//return false
+    if(index >= 0 && index < CHARACTER_INVENTORY_SIZE){
+        return &this->inventory[index];
+    }
+    return nullptr;
 }
 
 //Setter:
+void Character::setName(const std::string& name){
+    if(!name.empty()){
+        this->name = name;
+    }
+};
+
 void Character::setHealth(int health) {
+    if(health < 0){
+        this->health = 0;
+    }
     this->health = health;
 }
+
 void Character::setGold(int gold) {
-    this->gold = gold;
+    if(gold >= 0){
+        this->gold = gold;
+    }
 }

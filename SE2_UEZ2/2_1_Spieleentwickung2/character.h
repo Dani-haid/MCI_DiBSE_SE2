@@ -4,6 +4,8 @@
 #include <string>
 #include "item.h"
 
+#define CHARACTER_INVENTORY_SIZE	10
+
 //Forward declaration
 class Hero;
 
@@ -12,7 +14,7 @@ private:
     std::string name;
     int health;
     int gold;
-    Item inventory[10];
+    Item inventory[CHARACTER_INVENTORY_SIZE];
 
 public:
     void initCharacter(const std::string& name, int health, int gold);
@@ -23,12 +25,13 @@ public:
 
 
     //Getter:
-    const std::string getName() const;
+    const std::string& getName() const;
     int getHealth() const;
     int getGold() const;
     Item* getInventory(int index);
 
     //Setter:
+    void setName(const std::string& name);
     void setHealth(int health);
     void setGold(int gold);
 };
