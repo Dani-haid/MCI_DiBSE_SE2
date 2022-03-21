@@ -1,15 +1,5 @@
 #include "item.h"
 
-/*void Item::initItem(const std::string& name, int gold) {
-    this->name = name;
-    this->value = gold;
-    this->isValid = true;
-}
-
-void Item::initItem(void) {
-    this->isValid = false;
-}*/
-
 //Getter:
 const std::string& Item::getName() const {
     return name;

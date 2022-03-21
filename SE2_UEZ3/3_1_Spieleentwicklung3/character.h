@@ -4,8 +4,12 @@
 #include <iostream>
 #include <string>
 #include "item.h"
+//#include "hero.h"
 
 #define CHARACTER_INVENTORY_SIZE	10
+
+//forward declaration
+class Hero;
 
 class Character {
 protected:
@@ -18,18 +22,25 @@ protected:
 
 public:
 
-    //Default Konstruktor:
-    Character() : name(""), health(0), gold(0), armor(0), magicResistance(0){}
     //Konstruktor:
-    Character(std::string name, int health, int gold, int armor, int magicResistance) : name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){}
+    Character(const std::string& name, int health, int gold, int armor, int magicResistance)
+    : name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
+        std::cout << "Konstruktor Character.h aufgerufen" << std::endl;
+    };
+
     //Destruktor:
-    ~Character();
+    ~Character(){
+        std::cout << "Destruktor Character.h aufgerufen" << std::endl;
+    };
 
+    //Abstrakte Funktion = Funktion ohne Implementierung
+    //zeigt, dass es eine Funktion gibt, die Definition aber in den Kindklassen
+    // stattfindet, die diese Funktion erben
+    virtual void attack(Character &hero) = 0; //Hero &hero
+    //void attack(Hero &hero); //dynamisch: in Hero & NPC überlagern
 
-    void attack(Hero &hero); //dynamisch: in Hero & NPC überlagern
-
-    int addInventarItem(const Item& item);//noch definieren
-    Item removeInventarItem(int slot);//noch definieren
+    int addInventarItem(const Item& item);
+    Item removeInventarItem(int slot);
 
 
     //Getter:
@@ -48,6 +59,8 @@ public:
     void setMagicResistance(int magicResistance);
 
 };
+
+//std::ostream &operator<<(std::ostream &out, const Character &c);
 
 
 #endif //INC_3_1_SPIELEENTWICKLUNG3_CHARACTER_H
