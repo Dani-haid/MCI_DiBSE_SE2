@@ -18,6 +18,8 @@ int main() {
     Sorcerer pascal("Pascal", 100, 10, 3, 30, 4);
     pascal.addInventarItem(Item("Laser", 67));
 
+
+    Character &enemy = matthias;
     if(annina.fight(matthias)){
         if(annina.fight(pascal)){
             //Hero verkauft Items
@@ -27,13 +29,11 @@ int main() {
                     annina.sellItem(j);
                 }
             }
-        }else{
-            std::cout<<"Game Over! " << annina.getName() << " fiel in Ohnmacht! "<< pascal.getName() << " hat noch " << pascal.getHealth() << " Lebenspunkte uebrig!" <<std::endl;
+            return 0;
         }
-    }else{
-        std::cout<<"Game Over! " << annina.getName() << " fiel in Ohnmacht! "<< matthias.getName() << " hat noch " << matthias.getHealth() << " Lebenspunkte uebrig!" <<std::endl;
+        enemy = pascal;
     }
-
+    std::cout<<"Game Over! " << annina << " fiel in Ohnmacht! "<<  enemy << " hat noch " << enemy.getHealth() << " Lebenspunkte uebrig!" <<std::endl;
 
 
     return 0;

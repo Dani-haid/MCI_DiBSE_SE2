@@ -25,3 +25,9 @@ void Item::setValue(int value) {
 void Item::setIsValid(bool isValid) {
     this->isValid = isValid;
 }
+
+std::ostream &operator<<(std::ostream& out, const Item &i){
+    out << i.getName() << ", " << i.getValue();
+    return out;
+};
+

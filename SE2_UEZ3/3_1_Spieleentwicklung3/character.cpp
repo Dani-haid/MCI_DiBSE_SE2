@@ -24,6 +24,32 @@ Item Character::removeInventarItem(int slot) {
     return temp;
 }
 
+Item Character:: retriveRandomLoot(Character &enemy) {
+    //ggf. etwas effizienter schreiben
+    int randomNumbers[CHARACTER_INVENTORY_SIZE] = {-1};//Array für gültige Indexes des Inventories von Character
+    int count = 0;
+    for (int i = 0; i < CHARACTER_INVENTORY_SIZE; ++i) {
+        if (enemy.getInventory(i)->isIsValid()) {
+            randomNumbers[count] = i;
+            count++;
+        }
+    }
+    if (randomNumbers[0] < 0) {//Wenn Array an index 0 leer ist, hat der Gegner keine Items in seinem Inventar
+        std::cout << "keine Items im Inventar von " << enemy.getName() << " gefunden." << std::endl;
+        Item temp;
+        return temp;
+    }
+    while (1) {
+        int random = randomNumbers[std::rand() % (count)]; //generiere Zufallszahl
+        Item temp = enemy.removeInventarItem(random);
+        if (temp.isIsValid()) {
+            return temp;
+        }
+        Item empty;
+        return empty;
+    }
+}
+
 //Getter:
 const std::string& Character::getName() const{
     return name;
@@ -72,16 +98,20 @@ void Character::setGold(int gold) {
 }
 
 void Character::setArmor(int armor) {
-    this->armor = armor;
+    if(armor >= 0){
+        this->armor = armor;
+    }
 }
 
 void Character::setMagicResistance(int magicResistance) {
-    this->magicResistance = magicResistance;
+    if(magicResistance >= 0){
+        this->magicResistance = magicResistance;
+    }
 }
 
-/*std::ostream &operator<<(std::ostream &out, const Character &c){
-    out << c.getName() <<"Operatorenüberladung in Hero.h";
+std::ostream &operator<<(std::ostream &out, const Character &c){
+    out << c.getName();
     return out;
-}*/
+}
 
 

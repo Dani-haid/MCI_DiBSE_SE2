@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include "item.h"
-//#include "hero.h"
 
 #define CHARACTER_INVENTORY_SIZE	10
 
@@ -24,20 +23,16 @@ public:
 
     //Konstruktor:
     Character(const std::string& name, int health, int gold, int armor, int magicResistance)
-    : name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){
-        std::cout << "Konstruktor Character.h aufgerufen" << std::endl;
-    };
+    : name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){};
 
     //Destruktor:
     virtual ~Character(){};
 
-    //Abstrakte Funktion = Funktion ohne Implementierung
-    //zeigt, dass es eine Funktion gibt, die Definition aber in den Kindklassen
-    // stattfindet, die diese Funktion erben
-    virtual void attack(Character &hero) = 0; //Hero &hero
+    virtual void attack(Character &hero) = 0;
 
     int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);
+    Item retriveRandomLoot(Character &enemy);
 
 
     //Getter:
@@ -57,7 +52,7 @@ public:
 
 };
 
-//std::ostream &operator<<(std::ostream &out, const Character &c);
+std::ostream &operator<<(std::ostream &out, const Character &c);
 
 
 #endif //INC_3_1_SPIELEENTWICKLUNG3_CHARACTER_H

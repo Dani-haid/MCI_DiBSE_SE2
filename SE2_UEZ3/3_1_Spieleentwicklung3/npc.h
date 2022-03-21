@@ -9,15 +9,13 @@ public:
     //
     //Konstruktor
     NPC(const std::string& name, int health, int gold, int armor, int magicResistance)
-            : Character(name, health, gold, armor, magicResistance){
-        std::cout << "Calling NPC::Constructor" << std::endl;
-    };
+            : Character(name, health, gold, armor, magicResistance){};
     //Destruktor
     ~NPC() {
         std::cout << "Gegner " << this->name << " verabschiedet sich und reitet in den Sonnenuntergang." << std::endl;
     }
-
 };
 
+std::ostream &operator<<(std::ostream& out, const NPC &n);
 
 #endif //INC_3_1_SPIELEENTWICKLUNG3_NPC_H
