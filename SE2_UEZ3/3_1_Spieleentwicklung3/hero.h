@@ -7,9 +7,6 @@
 
 #define HERO_EQUIPMENT_SIZE			2
 
-//Forward declaration
-//class NPC;
-
 class Hero : public Character{
 protected:
     Item equipment[HERO_EQUIPMENT_SIZE];
@@ -23,18 +20,17 @@ public:
 
     //Destruktor
     virtual ~Hero() {
-        std::cout << "Calling Hero::Destructor" << std::endl;
+        std::cout << "Heldin " << this->name << " verabschiedet sich und reitet in den Sonnenuntergang." << std::endl;
     }
 
     virtual void attack(Character &enemy) override;
 
-    //void attack(Character &enemy);
-    //bool fight(Character &enemy);
+    bool fight(Character &enemy);
 
     int addEquipmentItem(const Item& item);
     Item removeEquipmentItem(int slot);
 
-    //int stealRandomItem(Character &enemy);
+    int stealRandomItem(Character &enemy);//umbenennen
 
     void sellItem(int index);
 

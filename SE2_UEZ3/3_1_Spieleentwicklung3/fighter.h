@@ -15,9 +15,9 @@ public:
     }
 
     //Destruktor
-    ~Fighter(){
-        std::cout << "Calling Fighter::Destructor" << std::endl;
-    };
+    virtual ~Fighter(){}
+
+    virtual void attack(Character &enemy) override;
 };
 
 

@@ -37,12 +37,63 @@ void Hero::sellItem(int index) {
 }
 
 void Hero::attack(Character &enemy){
-    //Heldin greift Gegener an und reduziert health random zwischen 15-25
-    int damage = 15 + std::rand() % 11;
-    int lifes = enemy.getHealth();
-    enemy.setHealth(lifes - damage);
+    //Die Heldin richtet einen Schaden gemäß folgender Formel an: damage = rand(15, 25) - Armor.
+    int rand = (15 + std::rand() % 11);
+    int damage = rand - enemy.getArmor();
+    //int damage = (15 + std::rand() % 11) - enemy.getArmor();
+    enemy.setHealth(enemy.getHealth() - damage);
     std::cout<< this->name << " trifft " << enemy.getName() << " für " << damage << " Lebenspunkte!" << std::endl;
 }
+
+bool Hero::fight(Character &enemy) {
+    std::cout << "--------------------" << std::endl;
+    std::cout << "Kampf " << this->getName() << " gegen " << enemy.getName() << " beginnt!" << std::endl;
+    while(this->health > 0 && enemy.getHealth() > 0){
+        this->attack(enemy);//Heldin greift Gegner an
+        if(enemy.getHealth() > 0){
+            enemy.attack(*this); //Gegner greift Heldin an
+        }
+    }
+
+    if(this->health > 0){
+        std::cout<<enemy.getName() << " fiel in Ohnmacht! "<< this->getName() <<
+                 " hat noch "<< this->getHealth() << " Lebenspunkte uebrig!" <<std::endl;
+        this->stealRandomItem(enemy);
+    }
+
+    //------tbd------//
+
+    return this->health > 0;
+}
+
+int Hero::stealRandomItem(Character &enemy){
+    //ggf. etwas effizienter schreiben
+    int randomNumbers [CHARACTER_INVENTORY_SIZE] = {-1};//Array für gültige Indexes des Inventories von Character
+    int count = 0;
+    for (int i = 0; i < CHARACTER_INVENTORY_SIZE; ++i) {
+        if(enemy.getInventory(i)->isIsValid()){
+            randomNumbers[count] = i;
+            count ++;
+        }
+    }
+    if(randomNumbers[0] < 0){//Wenn Array an index 0 leer ist, hat der Gegner keine Items in seinem Inventar
+        std::cout << "keine Items im Inventar von "<< enemy.getName() <<" gefunden." << std:: endl;
+        return 0;
+    }
+
+
+    while(1){
+        int random = randomNumbers[std::rand() % (count)]; //generiere Zufallszahl
+        Item temp = enemy.removeInventarItem(random);
+        if(temp.isIsValid()){
+            if(this->addInventarItem(temp) < 0){
+                std::cout<<"Kein Platz mehr vorhanden! Inventar von " << this->getName() <<" ist voll."<<std::endl;
+            };
+            break;
+        }
+    }
+    return health > 0;
+};
 
 //Getter:
 Item* Hero::getEquipment(int index){

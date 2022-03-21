@@ -13,16 +13,9 @@ public:
         std::cout << "Calling NPC::Constructor" << std::endl;
     };
     //Destruktor
-    virtual ~NPC() {
-        std::cout << "Calling NPC::Destructor" << std::endl;
+    ~NPC() {
+        std::cout << "Gegner " << this->name << " verabschiedet sich und reitet in den Sonnenuntergang." << std::endl;
     }
-
-    virtual void attack(Character &enemy) override;
-
-    //wird hier eig. nicht gebraucht weil ja an sorcerer und fighter weitervererbt!
-    /*virtual void attack()override {
-        std::cout << "virtuelle attack funktion in npc.h" << std::endl;
-    };*/
 
 };
 

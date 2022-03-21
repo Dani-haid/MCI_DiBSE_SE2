@@ -29,15 +29,12 @@ public:
     };
 
     //Destruktor:
-    ~Character(){
-        std::cout << "Destruktor Character.h aufgerufen" << std::endl;
-    };
+    virtual ~Character(){};
 
     //Abstrakte Funktion = Funktion ohne Implementierung
     //zeigt, dass es eine Funktion gibt, die Definition aber in den Kindklassen
     // stattfindet, die diese Funktion erben
     virtual void attack(Character &hero) = 0; //Hero &hero
-    //void attack(Hero &hero); //dynamisch: in Hero & NPC überlagern
 
     int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);

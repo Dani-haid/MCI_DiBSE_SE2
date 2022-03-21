@@ -13,13 +13,16 @@ private:
 public:
     //Default Konstruktor
     Item():name(""), value(0), isValid(false){
-        std::cout << "Default-Konstruktor Item.h aufgerufen" << std::endl;
+        //std::cout << "Default-Konstruktor Item.h aufgerufen" << std::endl;
     }
     //Konstruktor
     Item(const std::string& name, int value)
         : name(name), value(value), isValid(true){
-        std::cout << "Konstruktor Item.h aufgerufen" << std::endl;
+        //std::cout << "Konstruktor Item.h aufgerufen" << std::endl;
     }
+
+    //Destruktor
+    ~Item(){};
 
     //Getter:
     const std::string& getName() const;

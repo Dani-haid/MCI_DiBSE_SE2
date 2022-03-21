@@ -1,7 +1,6 @@
 #include <iostream>
 #include "character.h"
 #include "hero.h"
-#include "npc.h"
 #include "fighter.h"
 #include "sorcerer.h"
 #include <ctime>
@@ -13,21 +12,28 @@ int main() {
     Hero annina("Annina", 300, 50, 5, 3);
     annina.addInventarItem(Item("Zaubertrank", 75));
     annina.addInventarItem(Item("Teddykanone", 40));
-    //wieso bekommt dieses Item hier keinen Namen?
-    //wann wird nochmal "new" verwendet?
 
+    Fighter matthias("Matthias", 50, 10, 14, 30, 4);
+    matthias.addInventarItem(Item("Schwert", 45));
+    Sorcerer pascal("Pascal", 100, 10, 3, 30, 4);
+    pascal.addInventarItem(Item("Laser", 67));
 
-    NPC matthias("Matthias", 50, 0, 10, 5);
-    matthias.addInventarItem(Item("Giftpfeil", 55));
-    matthias.addInventarItem(Item("Software-Harpune", 355));
+    if(annina.fight(matthias)){
+        if(annina.fight(pascal)){
+            //Hero verkauft Items
+            std::cout << "**** "<< annina.getName() << " geht mit Ihrer Beute zur Bank." << " ****"<< std::endl;
+            if(annina.getHealth()>0){
+                for (int j = 0; j < CHARACTER_INVENTORY_SIZE; ++j) {
+                    annina.sellItem(j);
+                }
+            }
+        }else{
+            std::cout<<"Game Over! " << annina.getName() << " fiel in Ohnmacht! "<< pascal.getName() << " hat noch " << pascal.getHealth() << " Lebenspunkte uebrig!" <<std::endl;
+        }
+    }else{
+        std::cout<<"Game Over! " << annina.getName() << " fiel in Ohnmacht! "<< matthias.getName() << " hat noch " << matthias.getHealth() << " Lebenspunkte uebrig!" <<std::endl;
+    }
 
-    NPC pascal("Pascal", 100, 10, 22, 30);
-    pascal.addInventarItem(Item("Taschenrechner", 15));
-
-    Fighter dani("Dani", 200, 10, 22, 30, 4);
-    dani.addInventarItem(Item("Schwert", 45));
-    Sorcerer chris("Chris", 200, 10, 22, 30, 4);
-    chris.addInventarItem(Item("Laser", 67));
 
 
     return 0;

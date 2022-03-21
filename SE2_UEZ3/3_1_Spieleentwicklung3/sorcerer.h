@@ -12,15 +12,12 @@ public:
     Sorcerer(const std::string& name, int health, int gold, int armor, int magicResistance, int magicPower)
         : NPC(name, health, gold, armor, magicResistance), magicPower(magicPower){
         std::cout << "Calling Sorcerer::Constructor" << std::endl;
-        std::cout << this->name << " " << this->magicPower << std::endl;
     }
 
     //Destruktor
-    ~Sorcerer(){
-        std::cout << "Calling Sorcerer::Destructor" << std::endl;
-    }
+    virtual ~Sorcerer(){}
 
-    //virtual void attack(Character &enemy) override;
+    virtual void attack(Character &enemy) override;
 
 };
 
