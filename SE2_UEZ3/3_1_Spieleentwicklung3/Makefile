@@ -2,7 +2,7 @@
 # Name of the binary
 BINARY = prototyp3
 # Object files
-OBJS   = main.o hero.o character.o item.o fighter.o npc.o sorcerer.o
+OBJS   = main.o hero.o character.o item.o fighter.o sorcerer.o
 # Compiler flags
 CFLAGS = -Werror -Wall -std=c++17
 # Linker flags
