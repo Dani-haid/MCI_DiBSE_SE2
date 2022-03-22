@@ -22,7 +22,7 @@ public:
 
     //Destruktor
     virtual ~Hero() {
-        std::cout << "Heldin " << this->name << " verabschiedet sich und reitet in den Sonnenuntergang." << std::endl;
+        std::cout << "Heldin " << *this << " verabschiedet sich und reitet in den Sonnenuntergang." << std::endl;
     }
 
     virtual void attack(Character &enemy) override;

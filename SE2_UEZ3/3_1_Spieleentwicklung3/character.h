@@ -1,14 +1,10 @@
 #ifndef INC_3_1_SPIELEENTWICKLUNG3_CHARACTER_H
 #define INC_3_1_SPIELEENTWICKLUNG3_CHARACTER_H
 
-#include <iostream>
 #include <string>
 #include "item.h"
 
 #define CHARACTER_INVENTORY_SIZE	10
-
-//forward declaration
-class Hero;
 
 class Character {
 protected:
@@ -20,7 +16,6 @@ protected:
     int magicResistance;
 
 public:
-
     //Konstruktor:
     Character(const std::string& name, int health, int gold, int armor, int magicResistance)
     : name(name), health(health), gold(gold), armor(armor), magicResistance(magicResistance){};

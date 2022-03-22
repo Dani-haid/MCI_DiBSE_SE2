@@ -12,10 +12,8 @@ public:
             : Character(name, health, gold, armor, magicResistance){};
     //Destruktor
     ~NPC() {
-        std::cout << "Gegner " << this->name << " verabschiedet sich und reitet in den Sonnenuntergang." << std::endl;
+        std::cout << "Gegner " << *this << " verabschiedet sich und reitet in den Sonnenuntergang." << std::endl;
     }
 };
-
-std::ostream &operator<<(std::ostream& out, const NPC &n);
 
 #endif //INC_3_1_SPIELEENTWICKLUNG3_NPC_H

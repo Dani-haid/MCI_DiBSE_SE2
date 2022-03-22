@@ -11,7 +11,7 @@ public:
     //Konstruktor
     Fighter(const std::string& name, int health, int gold, int armor, int magicResistance, int strength)
         : NPC(name, health, gold, armor, magicResistance), strength(strength){
-        std::cout << "Kämpfer " << this->getName() << ", " << this->getHealth() << " Lebenspunkte, "
+        std::cout << *this << ", " << this->getHealth() << " Lebenspunkte, "
                   << this->getGold() << " Gold, " << this->getArmor() << " Armor, "
                   << this->getMagicResistance() << " Magic Resistance, " << this->strength <<
                   " Strength wurde erstellt." << std::endl;
@@ -20,7 +20,14 @@ public:
     //Destruktor
     virtual ~Fighter(){}
 
+    //friend Operatorenüberladung
+    friend std::ostream &operator<<(std::ostream &out, const Fighter &f);
+
     virtual void attack(Character &enemy) override;
+
+    //Getter:
+    int getStrength() const;
+    void setStrength(int strength);
 };
 
 std::ostream &operator<<(std::ostream& out, const Fighter &f);

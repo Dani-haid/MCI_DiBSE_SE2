@@ -12,7 +12,7 @@ private:
 
 public:
     //Default Konstruktor
-    Item():name(""), value(0), isValid(false){}
+    Item():value(0), isValid(false){}
 
     //Konstruktor
     Item(const std::string& name, int value)

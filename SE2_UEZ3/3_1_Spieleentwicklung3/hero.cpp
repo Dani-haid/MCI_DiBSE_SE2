@@ -29,9 +29,8 @@ void Hero::sellItem(int index) {
         if(this->inventory[index].isIsValid()){
             this->gold += inventory[index].getValue();
             this->inventory[index].setIsValid(false);
-            std::cout<<"Gegenstand " << this->inventory[index].getName() << " wurde für "
-                     << this->inventory[index].getValue() << " verkauft. "<< *this
-                     << " besitzt nun " << this->gold << " Gold." << std::endl;
+            std::cout<<"Gegenstand " << this->inventory[index] << "wurde verkauft. "
+                     << *this << " besitzt nun " << this->gold << " Gold." << std::endl;
         }
     }
 }
@@ -81,9 +80,6 @@ Item* Hero::getEquipment(int index){
 }
 
 std::ostream& operator<<(std::ostream& out, const Hero& h) {
-    /*out<< "Held " << h.getName() << ", " << h.getHealth() << " Lebenspunkte, "
-       << h.getGold() << " Gold, " << h.getArmor() << " Armor, "
-       << h.getMagicResistance() << " Magic Resistance";*/
     out << "Held " << h.getName();
     return out;
 }

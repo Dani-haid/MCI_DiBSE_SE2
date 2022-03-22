@@ -12,6 +12,15 @@ void Fighter::attack(Character &enemy){
     }
 }
 
+//Getter:
+int Fighter::getStrength() const{
+    return strength;
+};
+
+void Fighter::setStrength(int strength){
+    this->strength = strength;
+};
+
 std::ostream &operator<<(std::ostream& out, const Fighter &f){
     out << "Kämpfer " <<f.getName();
     return out;
