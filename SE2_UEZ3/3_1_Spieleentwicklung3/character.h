@@ -27,8 +27,6 @@ public:
 
     int addInventarItem(const Item& item);
     Item removeInventarItem(int slot);
-    Item retriveRandomLoot(Character &enemy);
-
 
     //Getter:
     const std::string& getName() const;

@@ -33,6 +33,7 @@ public:
     Item removeEquipmentItem(int slot);
 
     void sellItem(int index);
+    Item retrieveRandomLoot(Character &enemy);
 
     //Getter:
     Item *getEquipment(int index);

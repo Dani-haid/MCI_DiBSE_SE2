@@ -61,7 +61,7 @@ bool Hero::fight(Character &enemy) {
     if(this->health > 0){
         std::cout<<enemy << " fiel in Ohnmacht! "<< *this <<
                  " hat noch "<< this->getHealth() << " Lebenspunkte uebrig!" <<std::endl;
-        Item loot = this->retriveRandomLoot(enemy);
+        Item loot = this->retrieveRandomLoot(enemy);
         if(loot.isIsValid()){
             if(this->addInventarItem(loot) < 0){
                 std::cout<<"Kein Platz mehr vorhanden! Inventar von " << *this <<" ist voll."<<std::endl;
@@ -69,6 +69,30 @@ bool Hero::fight(Character &enemy) {
         }
     }
     return this->health > 0;
+}
+
+Item Hero:: retrieveRandomLoot(Character &enemy) {
+    //ggf. etwas effizienter schreiben
+    int randomNumbers[CHARACTER_INVENTORY_SIZE] = {-1};//Array für gültige Indexes des Inventories von Character
+    int count = 0;
+    for (int i = 0; i < CHARACTER_INVENTORY_SIZE; ++i) {
+        if (enemy.getInventory(i)->isIsValid()) {
+            randomNumbers[count] = i;
+            count++;
+        }
+    }
+    if (randomNumbers[0] < 0) {//Wenn Array an index 0 leer ist, hat der Gegner keine Items in seinem Inventar
+        std::cout << "keine Items im Inventar von " << enemy.getName() << " gefunden." << std::endl;
+        Item temp;
+        return temp;
+    }
+    int random = randomNumbers[std::rand() % (count)]; //generiere Zufallszahl
+    Item temp = enemy.removeInventarItem(random);
+    if (temp.isIsValid()) {
+        return temp;
+    }
+    Item empty;
+    return empty;
 }
 
 //Getter:
