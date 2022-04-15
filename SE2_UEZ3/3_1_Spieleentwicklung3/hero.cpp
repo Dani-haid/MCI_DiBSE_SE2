@@ -29,7 +29,7 @@ void Hero::sellItem(int index) {
         if(this->inventory[index].isIsValid()){
             this->gold += inventory[index].getValue();
             this->inventory[index].setIsValid(false);
-            std::cout<<"Gegenstand " << this->inventory[index] << "wurde verkauft. "
+            std::cout<<this->inventory[index] << "wurde verkauft. "
                      << *this << " besitzt nun " << this->gold << " Gold." << std::endl;
         }
     }

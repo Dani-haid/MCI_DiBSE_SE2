@@ -18,8 +18,8 @@ public:
     Item(const std::string& name, int value)
         : name(name), value(value), isValid(true){}
 
-    //Destruktor
-    ~Item(){};
+    /*//Destruktor
+    ~Item(){};*/
 
     //Getter:
     const std::string& getName() const;

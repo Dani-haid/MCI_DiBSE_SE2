@@ -27,7 +27,7 @@ void Item::setIsValid(bool isValid) {
 }
 
 std::ostream &operator<<(std::ostream& out, const Item &i){
-    out << i.getName() << " (" << i.getValue() << " Gold) ";
+    out << "Gegenstand " << i.getName() << " (" << i.getValue() << " Gold) ";
     return out;
 };
 
