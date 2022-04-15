@@ -2,6 +2,7 @@
 #define INC_3_1_SPIELEENTWICKLUNG3_SORCERER_H
 
 #include "npc.h"
+#include <iostream>
 
 class Sorcerer : public NPC{
 protected:
@@ -18,7 +19,7 @@ public:
     }
 
     //Destruktor
-    virtual ~Sorcerer(){}
+    //virtual ~Sorcerer(){}
 
     //friend Operatorenüberladung
     friend std::ostream &operator<<(std::ostream &out, const Sorcerer &s);
